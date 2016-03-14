@@ -961,6 +961,79 @@ class EndpointsMixin(object):
         """
         return self.get('trends/closest', params=params)
 
+    # Collections
+    def get_collections_list(self, **params):
+        """Retrieve information associated with a specific Collection
+
+        Docs: https://dev.twitter.com/rest/reference/get/collections/show
+        """
+        return self.get('collections/show', params=params)
+
+    def get_collections_show(self, **params):
+        """Find Collections created by a specific user or containing a specific curated Tweet.
+        Results are organized in a cursored collection.
+
+        Docs: https://dev.twitter.com/rest/reference/get/collections/list
+        """
+        return self.get('collections/list', params=params)
+
+    def get_collections_entries(self, **params):
+        """Retrieve the identified Collection, presented as a list of the Tweets curated within.
+
+        Docs: https://dev.twitter.com/rest/reference/get/collections/entries
+        """
+        return self.get('collections/entries', params=params)
+
+    def create_collection(self, **params):
+        """Create a Collection owned by the currently authenticated user.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/create
+        """
+        return self.post('collections/create', params=params)
+
+    def update_collection(self, **params):
+        """Update information concerning a Collection owned by the currently authenticated user.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/update
+        """
+        return self.post('collections/update', params=params)
+
+    def destroy_collection(self, **params):
+        """Permanently delete a Collection owned by the currently authenticated user.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/destroy
+        """
+        return self.post('collections/destroy', params=params)
+
+    def add_entry_to_collection(self, **params):
+        """Add a specified Tweet to a Collection.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/entries/add
+        """
+        return self.post('collections/entries/add', params=params)
+
+    def remove_entry_from_collection(self, **params):
+        """Remove the specified Tweet from a Collection.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/entries/remove
+        """
+        return self.post('collections/entries/remove', params=params)
+
+    def move_entry_in_collection(self, **params):
+        """Move a specified Tweet to a new position in a curation_reverse_chron ordered collection.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/entries/move
+        """
+        return self.post('collections/entries/move', params=params)
+    
+    def curate_entries_in_collection(self, **params):
+        """Curate a Collection by adding or removing Tweets in bulk. Updates must be limited to 100
+        cumulative additions or removals per request.
+
+        Docs: https://dev.twitter.com/rest/reference/post/collections/entries/curate
+        """
+        return self.post('collections/entries/curate', params=params, headers={'Content-Type': 'application/json'})
+
     # Spam Reporting
     def report_spam(self, **params):  # pragma: no cover
         """Report the specified user as a spam account to Twitter.
